@@ -1,0 +1,99 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Check your answers template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      <h1 class="govuk-heading-xl">
+        Check your answers before sending your application
+      </h1>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Clown name"
+            },
+            value: {
+              text: data['clownName']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/question-1",
+                  text: "Change",
+                  visuallyHiddenText: "Clown name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "How many years of clowning experience do you have?"
+            },
+            value: {
+              text: data['Years-of-clowning']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/question-2",
+                  text: "Change",
+                  visuallyHiddenText: "How many years of clowning experience do you have?"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Experience details"
+            },
+            value: {
+              text: data['experienceDetail']
+            },
+            actions: {
+              items: [
+                {
+                  href: "question-3",
+                  text: "Change",
+                  visuallyHiddenText: "Experience detail"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+<!-- [H] Output data stored from previous pages in the flow
+      {{ data | dump }}
+       -->
+
+      <h2 class="govuk-heading-m">
+        Now send your application
+      </h2>
+
+      <p>
+        By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
+      </p>
+
+      <form action="/confirmation" method="post" novalidate>
+
+        {{ govukButton({
+          text: "Accept and send"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
